@@ -15,14 +15,15 @@
     </div>
 
     <script>
-        // Set the target date (format: 'Month Day, Year HH:MM:SS')
         const targetDate = new Date('September 26, 2025 00:00:00').getTime();
-        /* const targetDate = new Date('September 18, 2025 16:58:00').getTime(); */
+        /* const targetDate = new Date().getTime() + 2500; */
 
         const countdownElement = document.getElementById('countdown');
 
         const title = document.getElementById('text');
 
+        let now = new Date().getTime();
+        let distance = targetDate - now;
         UpdateTimer();
 
         const timer = setInterval(() => {
@@ -35,8 +36,10 @@
         }, 1000);
 
         function UpdateTimer() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+            now = new Date().getTime();
+            distance = targetDate - now;
+
+            if (distance < 0) distance = 0;
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
